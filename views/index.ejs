@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+  </head>
+  <body>
+
+    <div class="container">
+      <%#Display of error message if login is wrongly done%>
+      <%- include("components/loginComponent")-%>
+
+      <div class="row animated fadeInDownBig" id="shop-background"></div>
+
+      <%#Display of message if payment is successful or not%>
+      <%- include("components/errorComponent") -%>
+
+      <%#Display of catalogue below%>
+      <div class="row" id="bikes">
+        <%
+      for(var i=0; i<dataBike.length; i++){
+        %>
+        <div class="col-12 col-sm-6 col-md-4 bike-card animated bounce">
+          <div class="card text-center">
+            <img class="card-img-top" src="<%=dataBike[i].productImage%>">
+            <div class="card-body">
+              <h5 class="card-title"><%=dataBike[i].productName%></h5>
+              <span class="shop-price"><%=dataBike[i].productPrice%>€</span>
+
+              <form method="POST" action="/add-shop">
+                  <input type="hidden" name="productPrice" value="<%=dataBike[i].productPrice %>">
+                  <input type="hidden" name="productName" value="<%=dataBike[i].productName %>">
+                  <input type="hidden" name="productImage" value="<%=dataBike[i].productImage %>">
+                  <input type="hidden" name="quantity" value="1">
+                  <button class="btn btn-outline-info btn-sm">Buy</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+        <%
+        }
+     %>
+
+      </div>
+
+    </div>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+    integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/a7ec7986bf.js"></script>
+    <script src="/javascripts/script.js" charset="utf-8"></script>
+  </body>
+</html>

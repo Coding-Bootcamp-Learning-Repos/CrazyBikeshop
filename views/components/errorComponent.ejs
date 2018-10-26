@@ -1,0 +1,11 @@
+<%# Alert to tell the user wether the payment was successful or not %>
+<% if (typeof error!=="undefined"){%>
+  <div class="alert alert-danger" role="alert">
+    Try again Einstein!
+  </div>
+<%}%>
+<% if (typeof payed!=="undefined"){%>
+  <div class="alert alert-success" role="alert">
+    Thank you so much, the payment was successful! <%=payed%>
+  </div>
+<%}%>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+  </head>
+  <body>
+
+    <div class="container">
+      <%#Display of error message if login is wrongly done%>
+      <%- include("components/loginComponent")-%>
+
+      <nav id="card-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Shop</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Basket</li>
+        </ol>
+      </nav>
+      <%#Display of message if payment is successful or not%>
+      <%- include("components/errorComponent") -%>
+
+      <%#Display of table of orders in basket%>
+      <h1>Basket</h1>
+      <div class="row" id="card-libelle">
+        <div class="col-5 col-sm-3">Picture</div>
+        <div class="col-4 d-none d-sm-block">Model</div>
+        <div class="col-3 col-sm-2">Quantity</div>
+        <div class="col-2 col-sm-1">Price</div>
+        <div class="col-1 d-none d-sm-block">Total</div>
+        <div class="col-2 col-sm-1">Suppr</div>
+      </div>
+
+      <%
+    var totalCmd=0;
+    for(var i=0; i<user.orders.length; i++){
+      totalCmd = totalCmd +(user.orders[i].productPrice*user.orders[i].quantity);
+      %>
+
+      <div class="row card-product">
+        <div class="col-5 col-sm-3"><img class="bike-picture" src="<%=user.orders[i].productImage%>"></div>
+        <div class="col-4 d-none d-sm-block"><p><%=user.orders[i].productName%></p></div>
+        <div class="col-3 col-sm-2">
+
+          <form action="/update-shop" method="POST">
+            <div class="row">
+              <div class="col-8">
+                  <input type="text" name="quantity" value="<%=user.orders[i].quantity%>" class="form-control form-control-sm">
+                  <input type="hidden" name="position" value="<%=i%>" class="form-control form-control-sm">
+              </div>
+              <div class="col-4">
+                  <button class="btn btn-outline-info btn-sm" name="button"><i class="fas fa-sync"></i></button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+        <div class="col-2 col-sm-1"><%=user.orders[i].productPrice%>€</div>
+        <div class="col-1 d-none d-sm-block"><%=user.orders[i].productPrice*user.orders[i].quantity%>€</div>
+        <div class="col-2 col-sm-1"><a class="btn btn-outline-info btn-sm" href="/delete-shop?position=<%=i%>"><i class="fas fa-trash-alt"></i></a></div>
+      </div>
+      <%
+      }
+   %>
+
+      <div class="row" id="card-total">
+        <div class="col-8 col-sm-10 text-right">Total basket: </div>
+        <div class="col-4 col-sm-2"><%=totalCmd%>€</div>
+      </div>
+
+      <div class="row" id="card-checkout">
+        <div class="col-12 text-right">
+          <form action="/payment" method="POST">
+            <script
+              src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="pk_test_IgCkdEYHh8CCqHDGk7GFAuXV"
+              data-amount= <%=totalCmd*100 %>
+              data-name="Bike Shop"
+              data-description="Widget"
+              data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+              data-locale="auto"
+              data-currency="eur">
+            </script>
+          </form>
+          <%#<button type="button" class="btn btn-outline-info btn-sm" name="button" id="customButton">Checkout</button>%>
+        </div>
+      </div>
+
+    </div>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+    integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/a7ec7986bf.js"></script>
+    <script src="/javascripts/script.js" charset="utf-8"></script>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+<%#Simple modal to show a form where user can sign in%>
+
+<div class="row animated fadeInDownBig" id="shop-header">
+  <div class="col-12" id="shop-header-div">
+    <div>
+     <a href="\"><img id="logo-header" src="./bike-logo.svg" alt=""></a> The Bike Shop Experience
+    </div>
+    <%if (user.name=="temp"){%>
+      <div>
+         <button data-target= "#signIn" class="signButton btn btn-outline-warning" data-toggle="modal">Sign In</button>
+         <button data-target= "#signUp" class="signButton btn btn-outline-warning" data-toggle="modal">Sign Up</button>
+       </div>
+    <% } else {%>
+      <div class="">
+        <%=user.name%>&nbsp&nbsp<a href="shop" class="btn btn-outline-warning btn-sm"><i class="fas fa-shopping-cart"></i><span class="badge badge-pill badge-primary" id="badge"><%=user.orders.length%></span></a>
+        <a href="/logout" class="btn btn-outline-secondary btn-sm"><i class="fas fa-sign-out-alt"></i></a>
+     </div>
+    <%}%>
+   </div>
+</div>
+
+
+<div class="modal fade" id="signIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">Sign In again</h5>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+       <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <form action="/connection" method="post">
+       <div class="modal-body">
+         <div class="form-group">
+           <label>Email address</label>
+           <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+           <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+         </div>
+         <div class="form-group">
+           <label>Password</label>
+           <input type="password" name="password" class="form-control"  placeholder="Password">
+         </div>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         <button type="submit" class="btn btn-primary">Sign-in</button>
+       </div>
+     </form>
+   </div>
+ </div>
+</div>
+
+<div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">Sign Up for the first time</h5>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+       <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <form action="/inscription" method="post">
+       <div class="modal-body">
+
+         <div class="form-group">
+           <label>Email address</label>
+           <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+           <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+         </div>
+         <div class="form-group">
+           <label>Password</label>
+           <input type="password" name="password" class="form-control"  placeholder="Password">
+         </div>
+         <div class="form-group">
+           <label>Name you would like is to call you</label>
+           <input type="text" name="name" class="form-control"  placeholder="Ned Stark">
+         </div>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         <button type="submit" class="btn btn-primary">Sign Up</button>
+       </div>
+     </form>
+   </div>
+ </div>
+</div>

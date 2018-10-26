@@ -1,0 +1,97 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  background-image: url("/images/fog.jpg");
+  background-position: center center;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+#card-header {
+  background-color: #343A40;
+  padding: 10px;
+  color: #FFFFFF;
+}
+
+#shop-header {
+  background-color: #343A40;
+  color: #FFFFFF;
+
+}
+#shop-header-div{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge {
+  position: relative;
+  left: 2px;
+  top: 1px;
+}
+
+.signButton{
+  font-size: 12px;
+  margin:5px;
+
+}
+
+#logo-header {
+  width: 50px;
+}
+
+#shop-background {
+  height: 150px;
+  background-image: url('bike-background.jpg');
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 30px;
+}
+
+
+#card-breadcrumb {
+  margin-top: 30px;
+  font-size: 12px;
+}
+
+#card-libelle {
+  border-top: 1px solid #F2F2F2;
+  border-bottom: 1px solid #F2F2F2;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-weight: 700;
+}
+
+.card-product {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #F2F2F2;
+  background-color: #fcfcfc;
+}
+
+#card-total {
+  border-bottom: 1px solid #F2F2F2;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-weight: 700;
+}
+
+#card-checkout {
+  padding-top: 7px;
+  margin-bottom: 20px;
+}
+
+.bike-picture {
+  width: 170px;
+}
+
+.shop-price {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.bike-card {
+  margin-bottom: 15px;
+}
